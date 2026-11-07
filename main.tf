@@ -23,8 +23,8 @@ resource "aws_internet_gateway" "name" {
 }
 
 resource "aws_subnet" "public" {
-count = length(var.Public_subnet)
-cidr_block = var.Public_subnet[count.index]
+count = length(var.public_subnet)
+cidr_block = var.public_subnet[count.index]
 availability_zone = local.az
 vpc_id = aws_vpc.vpc.id
 map_public_ip_on_launch = true
@@ -39,8 +39,8 @@ tags = merge(
 }
 
 resource "aws_subnet" "private" {
-count = length(var.Private_subnet)
-cidr_block = var.Private_subnet[count.index]
+count = length(var.private_subnet)
+cidr_block = var.private_subnet[count.index]
 availability_zone = local.az
 vpc_id =  aws_vpc.vpc.id
 tags = merge(
@@ -137,14 +137,14 @@ resource "aws_route" "database_route" {
 }
 
 resource "aws_route_table_association" "public_association"{
-    count = length(var.Public_subnet)
+    count = length(var.public_subnet)
     subnet_id = aws_subnet.public[count.index].id
     route_table_id = aws_route_table.public_route_table.id
 
 }
 
 resource "aws_route_table_association" "private_association" {
-    count = length(var.Private_subnet)
+    count = length(var.private_subnet)
     subnet_id = aws_subnet.private[count.index].id
     route_table_id = aws_route_table.private_route_table.id
 

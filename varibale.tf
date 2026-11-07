@@ -11,11 +11,11 @@ variable "environment" {
   
 }
 
-variable "Public_subnet" {
+variable "public_subnet" {
   type = list(string)
 }
 
-variable "Private_subnet" {
+variable "private_subnet" {
   type = list(string)
 }
 
