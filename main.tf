@@ -64,7 +64,7 @@ tags = merge(
   )
 }
 
-resource "aws_elastic_ip" "eip" {
+resource "aws_eip" "eip" {
     domain = "vpc"
     tags = merge(
     local.common_tags,
@@ -85,6 +85,7 @@ resource "aws_nat_gateway" "nat" {
         Name = "${var.project}-${var.environment}-nat"
     }
   )
+  depends_on = [ aws_internet_gateway.name.id ]
 
 }
 
