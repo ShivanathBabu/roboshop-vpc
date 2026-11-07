@@ -25,7 +25,7 @@ resource "aws_internet_gateway" "name" {
 resource "aws_subnet" "public" {
 count = length(var.public_subnet)
 cidr_block = var.public_subnet[count.index]
-availability_zone = local.az
+availability_zone = local.az[count.index]
 vpc_id = aws_vpc.vpc.id
 map_public_ip_on_launch = true
 
@@ -41,7 +41,7 @@ tags = merge(
 resource "aws_subnet" "private" {
 count = length(var.private_subnet)
 cidr_block = var.private_subnet[count.index]
-availability_zone = local.az
+availability_zone = local.az[count.index]
 vpc_id =  aws_vpc.vpc.id
 tags = merge(
     local.common_tags,
@@ -54,7 +54,7 @@ tags = merge(
 resource "aws_subnet" "database" {
 count = length(var.database_subnet)
 cidr_block = var.database_subnet[count.index]
-availability_zone = local.az
+availability_zone = local.az[count.index]
 vpc_id = aws_vpc.vpc.id  
 tags = merge(
     local.common_tags,
