@@ -76,7 +76,7 @@ resource "aws_eip" "eip" {
 }
 
 resource "aws_nat_gateway" "nat" {
-  allocation_id = aws_elastic_ip.id
+  allocation_id = aws_eip.eip.id
   subnet_id = aws_subnet.public[0].id
 
   tags = merge(
@@ -85,7 +85,7 @@ resource "aws_nat_gateway" "nat" {
         Name = "${var.project}-${var.environment}-nat"
     }
   )
-  depends_on = [ aws_internet_gateway.name.id ]
+  depends_on = [ aws_internet_gateway.name]
 
 }
 
