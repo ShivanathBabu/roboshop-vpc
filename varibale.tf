@@ -12,13 +12,13 @@ variable "environment" {
 }
 
 variable "Public_subnet" {
-  
+  type = list(string)
 }
 
 variable "Private_subnet" {
-  
+  type = list(string)
 }
 
 variable "database_subnet" {
-  
+  type = list(string)
 }
